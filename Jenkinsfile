@@ -19,26 +19,7 @@ pipeline {
     }
 }
 
-        stage('Check Pip Installation') {
-            steps {
-                script {
-                    // Check if 'pip' command is found
-                    // returnStatus: true prevents the pipeline from failing immediately if the command is not found
-                    def pip_installed = sh(script: 'command -v pip || command -v pip3', returnStatus: true)
-
-                    if (pip_installed == 0) {
-                        echo "Pip is installed. Proceeding with installation of dependencies."
-                        // You can now run your installation commands
-                        sh 'pip install -r requirements.txt'
-                    } else {
-                        echo "Pip is not installed or not in the PATH."
-                        // Add steps here to install pip if necessary, or fail the build explicitly
-                        // currentBuild.result = 'FAILURE'
-                        // error "Pip missing, stopping build."
-                    }
-                }
-            }
-        }
+       
 
         stage('Install Dependencies') {
             steps {

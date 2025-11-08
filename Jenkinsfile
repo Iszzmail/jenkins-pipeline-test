@@ -12,6 +12,8 @@ pipeline {
                 echo 'Fetching source code...'
                 git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
             }
+        }
+
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
@@ -22,10 +24,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Running container...'
-                sh 'docker run -d -p 7070:7070 ${APP_NAME}:${VERSION}'
+                sh 'docker run -d -p 7070:80 ${APP_NAME}:${VERSION}'
             }
         }
-    }}
+    }
 
     post {
         success {

@@ -13,9 +13,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
             }
         }
-        stage('Install Pip') {
+ stage('Install Sudo and Pip') {
     steps {
-        sh 'sudo apt-get update && sudo apt-get install -y python3-pip'
+        // First install sudo (if possible without root access, unlikely)
+        sh 'apt-get update && apt-get install -y sudo'
+        
+        // Then use it
+        sh 'sudo apt-get install -y python3-pip'
     }
 }
 

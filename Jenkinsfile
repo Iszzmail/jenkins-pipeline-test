@@ -4,14 +4,14 @@ pipeline {
     environment {
         APP_NAME = 'jenkins-static-site'
         VERSION = '1.0'
-    }}
+    }
 
     stages {
         stage('Checkout') {
             steps {
                 echo 'Fetching source code...'
                 git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
-
+            }
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'

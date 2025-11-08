@@ -13,7 +13,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
             }
         }
-    
+        stage('Install Pip') {
+    steps {
+        sh 'apt-get update && apt-get install -y python3-pip'
+    }
+}
+
         stage('Check Pip Installation') {
             steps {
                 script {

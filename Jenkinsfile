@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Fetching source code...'
-                git branch: 'main', url: 'https://github.com/yourusername/flask-jenkins-demo.git'
+                git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
             }
         }
 

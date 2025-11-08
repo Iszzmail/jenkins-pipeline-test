@@ -4,7 +4,7 @@ pipeline {
     environment {
         APP_NAME = 'jenkins-static-site'
         VERSION = '1.0'
-    }
+    }}
 
     stages {
         stage('Checkout') {
@@ -25,7 +25,7 @@ pipeline {
                 sh 'docker run -d -p 7070:7070 ${APP_NAME}:${VERSION}'
             }
         }
-    }
+    }}
 
     post {
         success {

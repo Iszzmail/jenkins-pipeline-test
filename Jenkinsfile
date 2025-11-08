@@ -13,8 +13,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
             }
         }
-
-    stages {
+    
         stage('Check Pip Installation') {
             steps {
                 script {
@@ -35,9 +34,6 @@ pipeline {
                 }
             }
         }
-    }
-}
-
 
         stage('Install Dependencies') {
             steps {
@@ -56,17 +52,17 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker build -t ${APP_NAME}:${VERSION} .'
+                sh "docker build -t ${APP_NAME}:${VERSION} ." // Use double quotes for interpolation
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Running Flask app container...'
-                sh 'docker run -d -p 5000:5000 ${APP_NAME}:${VERSION}'
+                sh "docker run -d -p 5000:5000 ${APP_NAME}:${VERSION}" // Use double quotes for interpolation
             }
         }
-    }
+    } // This closing brace was missing in the original code
 
     post {
         success {

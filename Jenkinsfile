@@ -10,9 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Fetching source code...'
-                git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-demo.git'
-            }
-        }
+                git branch: 'main', url: 'https://github.com/Iszzmail/jenkins-pipeline-test.git'
 
         stage('Build Docker Image') {
             steps {

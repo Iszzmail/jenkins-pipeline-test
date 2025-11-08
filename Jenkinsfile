@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = 'flask-jenkins-demo'
+        APP_NAME = 'jenkins-static-site'
         VERSION = '1.0'
     }
 
@@ -14,38 +14,24 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                echo 'Installing Python dependencies...'
-                sh 'pip install -r requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                echo 'Running unit tests...'
-                sh 'pytest --maxfail=1 --disable-warnings -q'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                sh "docker build -t ${APP_NAME}:${VERSION} ." // Use double quotes for interpolation
+                sh 'docker build -t ${APP_NAME}:${VERSION} .'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Running Flask app container...'
-                sh "docker run -d -p 5000:5000 ${APP_NAME}:${VERSION}" // Use double quotes for interpolation
+                echo 'Running container...'
+                sh 'docker run -d -p 7070:7070 ${APP_NAME}:${VERSION}'
             }
         }
-    } // This closing brace was missing in the original code
+    }
 
     post {
         success {
-            echo '✅ Pipeline completed successfully!'
+            echo '✅ Site deployed successfully! Visit http://localhost:7070'
         }
         failure {
             echo '❌ Pipeline failed.'
